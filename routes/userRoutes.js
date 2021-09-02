@@ -1,6 +1,8 @@
 const { User, validateUser, userSchema } = require('../models/userModel');
 const express = require('express');
 const router = express.Router();
+const config = require ( 'config' );
+const  jwt  =  require('jsonwebtoken'); 
 
 const bcrypt = require("bcrypt")
 // const { models } = require("mongoose");
@@ -19,7 +21,11 @@ try {
     password: await bcrypt.hash(req.body.password, salt),
     });
     await user.save();
-    return res.send({ _id: user._id, name: user.name, email: user.email });
+    const token = jwt.sign( { _id: user._id, name: user.name },  config.get('jwtSecret') );
+    return res
+    .header('x-auth-token', token)
+    .header('access-control-expose-headers', 'x-auth-token')
+    .send({ _id: user._id, name: user.name, email: user.email }); 
     } catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
     }
