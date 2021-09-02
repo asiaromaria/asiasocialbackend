@@ -1,5 +1,5 @@
 {
-  "name": "socialbackend",
+  "name": "asiasocialbackend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asiaromaria/socialbackend.git"
+    "url": "git+https://github.com/asiaromaria/asiasocialbackend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/asiaromaria/socialbackend/issues"
+    "url": "https://github.com/asiaromaria/asiasocialbackend/issues"
   },
-  "homepage": "https://github.com/asiaromaria/socialbackend#readme",
+  "homepage": "https://github.com/asiaromaria/asiasocialbackend#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "config": "^3.3.6",
