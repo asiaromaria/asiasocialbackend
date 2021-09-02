@@ -19,7 +19,7 @@ app.use('/api/auth', auth)
 app.use('/api/users', user)
 // where your api endpoint is: app.use('/api/endpoint', endpoint);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 app.listen(port, () => {
     console.log(`Server started on port: ${port}`);
 });
