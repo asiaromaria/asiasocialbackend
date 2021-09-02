@@ -3,7 +3,8 @@ const  bcrypt  =  require('bcrypt');
 const  express  =  require('express'); 
 const  {  User  }  =  require('../models/userModel');
 const  router  =  express.Router(); 
-const  config  =  require('config'); const  jwt  =  require('jsonwebtoken'); 
+const  config  =  require('config'); 
+const  jwt  =  require('jsonwebtoken'); 
 const { isError } = require('joi');
 
 
