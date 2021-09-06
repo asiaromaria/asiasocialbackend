@@ -9,6 +9,15 @@ const { User, validateUser, userSchema } = require('../models/userModel');
 //Here we are specifying that we want both a user id and a product id to be 
 //passed to the route handler via the requestor’s endpoint URL. 
 
+router.get('/', async (req, res) => {
+    try {
+      const users = await User.find();
+      return res.send(users);
+    } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+  });
+
 router.post('/', async (req, res) => {
     try {
         const { error } = validateUser(req.body);
@@ -88,5 +97,17 @@ router.delete('/:userId/shoppingcart/:productId', auth, async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${ex}`);   
     } 
 }); 
+
+router.delete('/', async (req, res) => {
+    try {
+      const user = await User.findByIdAndRemove(req.params.id);
+      if (!user)
+        return res.status(400).send(`The user with id "${req.params.id}" does not exist.`);
+      
+      return res.send(user);
+    } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+  });
 
 module.exports = router;
