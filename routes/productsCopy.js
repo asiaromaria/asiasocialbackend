@@ -2,6 +2,8 @@ const { Product, validate } = require("../models/products");
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const  auth  =  require('../middleware/auth');
+const  admin  =  require('../middleware/admin');
 
 //All endpoints and routen handlers go here.
 
@@ -27,7 +29,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.post("/", async (req, res) => {
+router.post("/", [auth, admin], async (req, res) => {
   try {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error);
