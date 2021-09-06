@@ -9,7 +9,7 @@ const { User, validateUser, userSchema } = require('../models/userModel');
 //Here we are specifying that we want both a user id and a product id to be 
 //passed to the route handler via the requestor’s endpoint URL. 
 
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { error } = validateUser(req.body);
         if (error) return res.status(400).send(error.details[0].message);
@@ -20,9 +20,10 @@ router.post('/', auth, async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, salt),
+        isAdmin: req.body.isAdmin,
         });
         await user.save();
-        const  token  =  user.generateAuthToken();
+        const token = user.generateAuthToken();
         return res
         .header('x-auth-token', token)
         .header('access-control-expose-headers', 'x-auth-token')
